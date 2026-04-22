@@ -62,65 +62,6 @@ uint32_t colors[TOTAL_PALETTES][4] =           fixTime.year(),
           
     displayCurrentTime();
   }
-  else if( minute_button && hasChanged(MINUTE_PIN))
-  {
-    toggleOnOff();
-  } 
-  else if( hour_button && hasChanged(HOUR_PIN))
-  {
-    palette = (palette+1)%MAX_PALETTES;
-    oldHours = 99;
-    oldError = 99;
-  }   
-  else if( button && hasChanged(BTN_PIN))
-  {
-    mode = mode + 1;
-    
-    if(mode >= MAX_MODES)
-      mode = 0;
-  }
-
-  // Store buttons new values
-  resetButtonValues();
-  switch(mode)
-  {
-    case 0:  
-      displayCurrentTime();
-      break;
-      
-    case 1:
-      oldHours = 99;
-      rainbowCycle(20);
-      break;
-      
-    case 2:
-      oldHours = 99;
-      rainbow(20);
-      break;
-      
-    case 3:
-      oldHours = 99;
-      // Display error code
-      displayErrorCode();
-      break;
-  }  
-}
-
-int debounce(int pin)
-{
-  int val = digitalRead(pin);
-  if( val == lastButtonValue[pin] )
-  {
-    currentButtonValue[pin] = val;
-    return val;
-  }
-    
-  delay(DEBOUNCE_DELAY);
-  
-  val = digitalRead(pin);
-  if( val != lastButtonValue[pin] )
-  {
-    currentButtonValue[pin] = val;
     return val;
   }
   
